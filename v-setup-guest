@@ -54,6 +54,9 @@ sudo sed -i s,";date.timezone =","date.timezone = \"Europe/Istanbul\"",g /etc/ph
 echo -e "\nSet short_open_tag from Off to On \n"
 sudo sed -i s,"short_open_tag = Off","short_open_tag = On",g /etc/php5/apache2/php.ini
 
+echo -e "\nAttempting to update Composer\n"
+sudo composer selfupdate
+
 echo -e "All Done! Simply type followings to add new virtual host on your guest machine:"
 echo -e "e.g. v-add-host domain.ltd FolderNameUnderYourHostMachineCodeFolder \n"
 
