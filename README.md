@@ -1,7 +1,15 @@
 # Scotchbox Configuration
 My Scripts to work with Vagrant Scotchbox 2.5
 
-## Setup
+## First HOST Machine
+First we must some adjustments in our host machine.
+
+### Install v-add-domain
+```bash
+wget https://raw.githubusercontent.com/yahyaerturan/scotchbox_scripts/master/v-add-vhost --output-document=bin/v-add-vhost;chmod +x bin/v-add-vhost
+```
+
+## Setup GUEST Machine
 All commands are designed to be run inside your home folder: `vagrant@scotchbox:~$ `
 
 Run those before starting:
@@ -25,6 +33,17 @@ sudo apt-get -y remove mysql-server;sudo apt-get autoremove;sudo apt-get -y inst
 ### Install PHPMyAdmin
 ```bash
 sudo apt-get install phpmyadmin;sudo chown -R vagrant:vagrant /var/lib/phpmyadmin/tmp/
+```
+### Update PHP Settings
+```bash
+# Set Post Max Size
+sudo sed -i s,"post_max_size = 8M","post_max_size = 64M",g /etc/php5/apache2/php.ini
+# Set Upload Max File Size
+sudo sed -i s,"upload_max_filesize = 2M","upload_max_filesize = 64M",g /etc/php5/apache2/php.ini
+# Set Date Timezone to Europe/Istanbul
+sudo sed -i s,";date.timezone =","date.timezone = \"Europe/Istanbul\"",g /etc/php5/apache2/php.ini
+# Enable Short Open Tags
+sudo sed -i s,"short_open_tag = Off","short_open_tag = On",g /etc/php5/apache2/php.ini
 ```
 ### Install v-add-vhost
 ```bash
