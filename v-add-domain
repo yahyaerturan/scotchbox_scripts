@@ -1,4 +1,5 @@
 #!/bin/bash
+echo -e "\n@author: Yahya ERTURAN <root@yahyaerturan.com> \n"
 
 (( EUID != 0 )) && exec sudo -- "$0" "$@"
 
@@ -22,7 +23,7 @@ if grep -q "$domain" /etc/hosts; then
     echo "***";
     cat /etc/hosts | grep "$domain";
     echo "***";
-    echo "$domain is added succesfully";
+    echo "$domain is added succesfully!";
 else
     echo "An error occured. Adding $domain to etc/hosts is failed!";
 fi
