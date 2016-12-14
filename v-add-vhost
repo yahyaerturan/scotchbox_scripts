@@ -4,6 +4,7 @@
 
 domain=${1}
 folder=${2}
+confPath="/etc/apache2/sites-available/$domain.conf"
 
 if [[ -z $folder ]]; then
     echo "You must specify a folder name under /home/vagrant/Code/"
@@ -14,21 +15,21 @@ else
     echo -e "ServerName   : $domain"
     echo -e "Server Alias : www.$domain"
     echo -e "DocumentRoot is set to /home/vagrant/Code/$folder/public \n"
-    sudo touch /etc/apache2/sites-available/$domain.conf
-    sudo echo "<VirtualHost *:80>" >> $domain.conf
-    sudo echo "    ServerAdmin webmaster@localhost" >> $domain.conf
-    sudo echo "    ServerName $domain" >> $domain.conf
-    sudo echo "    ServerAlias www.$domain" >> $domain.conf
-    sudo echo "    DocumentRoot /home/vagrant/Code/$folder/public" >> $domain.conf
-    sudo echo "    <Directory /home/vagrant/Code/$folder/public/>" >> $domain.conf
-    sudo echo "        Options +Indexes +FollowSymLinks +MultiViews" >> $domain.conf
-    sudo echo "            AllowOverride All" >> $domain.conf
-    sudo echo "        Require all granted" >> $domain.conf
-    sudo echo "    </Directory>" >> $domain.conf
-    sudo echo "    ErrorLog ${APACHE_LOG_DIR}/error.log" >> $domain.conf
-    sudo echo "    CustomLog ${APACHE_LOG_DIR}/access.log combined" >> $domain.conf
-    sudo echo "</VirtualHost>" >> $domain.conf
-    echo -e "/etc/apache2/sites-available/$domain.conf is created \n"
+    sudo touch $confPath
+    sudo echo -e "<VirtualHost *:80>" >> $confPath
+    sudo echo -e "    ServerAdmin webmaster@localhost" >> $confPath
+    sudo echo -e "    ServerName $domain" >> $confPath
+    sudo echo -e "    ServerAlias www.$domain" >> $confPath
+    sudo echo -e "    DocumentRoot /home/vagrant/Code/$folder/public" >> $confPath
+    sudo echo -e "    <Directory /home/vagrant/Code/$folder/public/>" >> $confPath
+    sudo echo -e "        Options +Indexes +FollowSymLinks +MultiViews" >> $confPath
+    sudo echo -e "            AllowOverride All" >> $confPath
+    sudo echo -e "        Require all granted" >> $confPath
+    sudo echo -e "    </Directory>" >> $confPath
+    sudo echo -e "    ErrorLog ${APACHE_LOG_DIR}/error.log" >> $confPath
+    sudo echo -e "    CustomLog ${APACHE_LOG_DIR}/access.log combined" >> $confPath
+    sudo echo -e "</VirtualHost>" >> $confPath
+    echo -e "$confPath is created \n"
 
     echo "Enabling $domain.."
     sudo a2ensite $domain
