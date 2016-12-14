@@ -1,0 +1,37 @@
+#!/bin/bash
+
+(( EUID != 0 )) && exec sudo -- "$0" "$@"
+
+domain=${1}
+folder=${2}
+
+if [[ -z $folder ]]; then
+    echo "You must specify a folder name under /home/vagrant/Code/"
+    echo "e.g. vayesEYS [to be resolved as /home/vagrant/Code/vayesEYS"
+    exit
+else
+    echo -e "Your Virtual Host is being created... \n"
+    echo -e "ServerName   : $domain"
+    echo -e "Server Alias : www.$domain"
+    echo -e "DocumentRoot is set to /home/vagrant/Code/$folder/public \n"
+    sudo touch $domain.conf
+    sudo echo "<VirtualHost *:80>" >> $domain.conf
+    sudo echo "    ServerAdmin webmaster@localhost" >> $domain.conf
+    sudo echo "    ServerName vayes-eys.dev" >> $domain.conf
+    sudo echo "    ServerAlias www.vayes-eys.dev" >> $domain.conf
+    sudo echo "    DocumentRoot /home/vagrant/Code/$folder/public" >> $domain.conf
+    sudo echo "    <Directory /home/vagrant/Code/$folder/public/>" >> $domain.conf
+    sudo echo "        Options +Indexes +FollowSymLinks +MultiViews" >> $domain.conf
+    sudo echo "            AllowOverride All" >> $domain.conf
+    sudo echo "        Require all granted" >> $domain.conf
+    sudo echo "    </Directory>" >> $domain.conf
+    sudo echo "    ErrorLog ${APACHE_LOG_DIR}/error.log" >> $domain.conf
+    sudo echo "    CustomLog ${APACHE_LOG_DIR}/access.log combined" >> $domain.conf
+    sudo echo "</VirtualHost>" >> $domain.conf
+    echo -e "/etc/apache2/sites-available/$domain.conf is created \n"
+
+    echo "Enabling $domain.."
+    sudo a2ensite $domain
+    echo "Restarting Apache2"
+    sudo service apache2 restart
+fi
