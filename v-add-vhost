@@ -14,7 +14,7 @@ else
     echo -e "ServerName   : $domain"
     echo -e "Server Alias : www.$domain"
     echo -e "DocumentRoot is set to /home/vagrant/Code/$folder/public \n"
-    sudo touch $domain.conf
+    sudo touch /etc/apache2/sites-available/$domain.conf
     sudo echo "<VirtualHost *:80>" >> $domain.conf
     sudo echo "    ServerAdmin webmaster@localhost" >> $domain.conf
     sudo echo "    ServerName $domain" >> $domain.conf
