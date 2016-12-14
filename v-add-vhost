@@ -17,8 +17,8 @@ else
     sudo touch $domain.conf
     sudo echo "<VirtualHost *:80>" >> $domain.conf
     sudo echo "    ServerAdmin webmaster@localhost" >> $domain.conf
-    sudo echo "    ServerName vayes-eys.dev" >> $domain.conf
-    sudo echo "    ServerAlias www.vayes-eys.dev" >> $domain.conf
+    sudo echo "    ServerName $domain" >> $domain.conf
+    sudo echo "    ServerAlias www.$domain" >> $domain.conf
     sudo echo "    DocumentRoot /home/vagrant/Code/$folder/public" >> $domain.conf
     sudo echo "    <Directory /home/vagrant/Code/$folder/public/>" >> $domain.conf
     sudo echo "        Options +Indexes +FollowSymLinks +MultiViews" >> $domain.conf
