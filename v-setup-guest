@@ -1,0 +1,61 @@
+#!/bin/bash
+
+echo -e "\n@author: Yahya ERTURAN <root@yahyaerturan.com> \n"
+
+(( EUID != 0 )) && exec sudo -- "$0" "$@"
+
+# Change directory to /home/{USER}
+cd ~
+
+echo -e "Attempting to create ~/bin directory... OK!"
+mkdir -p bin;
+
+if grep -q "export PATH=\$PATH:\$HOME/bin" ~/.bashrc; then
+    echo -e "PATH to ~/bin detected. OK! \n";
+else
+    echo "export PATH=$PATH:$HOME/bin" >> .bashrc
+    echo -e "Adding ~/bin as PATH to .bashrc... OK! \n"
+fi
+
+# Install and Setup v-add-host
+echo -e "Downloading v-add-host \n"
+wget https://raw.githubusercontent.com/yahyaerturan/scotchbox_scripts/master/v-add-host --output-document=bin/v-add-host
+
+echo -e "Marking v-add-host as executable.... OK! \n"
+chmod +x bin/v-add-host
+
+# Replacing outdated PPA for Ondrej-PHP to updated Ondrej/PHP
+echo -e "\nAttempting to replace outdated PPA for Ondrej-PHP to updated Ondrej/PHP...\n"
+sudo rm /etc/apt/sources.list.d/ondrej-php*;sudo add-apt-repository ppa:ondrej/php;sudo apt-get update;
+
+# Remove MySql 5.5 and install MySql 5.6
+echo -e "\nAttempting to remove MySql 5.5 and install MySql 5.6 \n"
+sudo apt-get -y remove mysql-server;sudo apt-get autoremove;sudo apt-get -y install mysql-client-5.6 mysql-client-core-5.6;sudo apt-get -y install mysql-server-5.6
+
+# Install PHPMyAdmin
+echo -e "\nAttempting to install PHPMyAdmin\n"
+sudo apt-get install phpmyadmin;
+echo -e "\nAttempting to change owner of /var/lib/phpmyadmin/tmp/ \n"
+sudo chown -R vagrant:vagrant /var/lib/phpmyadmin/tmp/
+
+# UPDATE PHP INI: Set Post Max Size
+echo -e "\nSet PHP post_max_size from 8M to 64M\n"
+sudo sed -i s,"post_max_size = 8M","post_max_size = 64M",g /etc/php5/apache2/php.ini
+
+# UPDATE PHP INI: Set Upload Max File Size
+echo -e "\nSet PHP upload_max_filesize from 2M to 64M\n"
+sudo sed -i s,"upload_max_filesize = 2M","upload_max_filesize = 64M",g /etc/php5/apache2/php.ini
+
+# UPDATE PHP INI: Set Date Timezone to Europe/Istanbul
+echo -e "\nSet timezone to Europe/Istanbul \n"
+sudo sed -i s,";date.timezone =","date.timezone = \"Europe/Istanbul\"",g /etc/php5/apache2/php.ini
+
+# UPDATE PHP INI: Enable Short Open Tags
+echo -e "\nSet short_open_tag from Off to On \n"
+sudo sed -i s,"short_open_tag = Off","short_open_tag = On",g /etc/php5/apache2/php.ini
+
+echo -e "All Done! Simply type followings to add new virtual host on your guest machine:"
+echo -e "e.g. v-add-host domain.ltd FolderNameUnderYourHostMachineCodeFolder \n"
+
+echo -e "Remember to add following line Vagrantfile:"
+echo -e "config.vm.synced_folder \"/home/yahya/Code\", \"/home/vagrant/Code\", :mount_options => [\"dmode=777\", \"fmode=666\"]"
