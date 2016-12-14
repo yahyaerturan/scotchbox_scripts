@@ -2,21 +2,21 @@
 
 echo -e "\n@author: Yahya ERTURAN <root@yahyaerturan.com> \n"
 cd ~
-echo -e "Attempting to create ~/bin directory \n"
+echo -e "Attempting to create ~/bin directory... OK!"
 mkdir -p bin;
 
 if grep -q "export PATH=\$PATH:\$HOME/bin" ~/.bashrc; then
     echo -e "PATH to ~/bin detected. OK! \n";
 else
     echo "export PATH=$PATH:$HOME/bin" >> .bashrc
-    echo -e "PATH to ~/bin is added to your .bashrc \n"
+    echo -e "Adding ~/bin as PATH to .bashrc... OK! \n"
 fi
 
 # Install and Setup v-add-domain
 echo -e "Downloading v-add-domain \n"
 wget https://raw.githubusercontent.com/yahyaerturan/scotchbox_scripts/master/v-add-domain --output-document=bin/v-add-domain
 
-echo -e "Set v-add-domain executable \n"
+echo -e "Marking v-add-domain as executable.... OK! \n"
 chmod +x bin/v-add-domain
 
 echo -e "All Done! Simply type \"v-add-domain abc.dev\" to add new record to /etc/hosts"
