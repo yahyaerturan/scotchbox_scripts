@@ -3,6 +3,11 @@ My Scripts to work with Vagrant Scotchbox 2.5
 
 There are some standard tasks which I have to do after a new Scotchbox. Changing Ondrej PPA Path, Upgrading MySQL, Installing PHPMyAdmin, tweak php.ini, etc. So I have written some codes to automate it.
 
+#### First just a little addition to Vagrantfile
+```bash
+config.vm.synced_folder "/home/yahya/Code", "/home/vagrant/Code", :mount_options => ["dmode=777", "fmode=666"]
+```
+
 ## Remimder
 All commands are designed to be run inside your home folder: `vagrant@scotchbox:~$ ` or `yahya@yahya-X550CC:~$ `
 
