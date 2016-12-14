@@ -1,7 +1,8 @@
 #!/bin/bash
 
-echo -e "\n @author: Yahya ERTURAN <root@yahyaerturan.com> \n"
+echo -e "\n@author: Yahya ERTURAN <root@yahyaerturan.com> \n"
 cd ~
+echo -e "Attempting to create ~/bin directory \n"
 mkdir -p bin;
 
 if grep -q "export PATH=\$PATH:\$HOME/bin" ~/.bashrc; then
@@ -12,9 +13,10 @@ else
 fi
 
 # Install and Setup v-add-domain
-echo -e "Downloading v-add-domain"
+echo -e "Downloading v-add-domain \n"
+wget https://raw.githubusercontent.com/yahyaerturan/scotchbox_scripts/master/v-add-domain --output-document=bin/v-add-domain
 
-echo "wget https://raw.githubusercontent.com/yahyaerturan/scotchbox_scripts/master/v-add-domain --output-document=bin/v-add-domain"
-echo "chmod +x bin/v-add-domain"
+echo "Set v-add-domain executable \n"
+chmod +x bin/v-add-domain
 
-echo -e "Simpyl type \"v-add-domain abc.dev\""
+echo -e "All Done! Simply type \"v-add-domain abc.dev\""
