@@ -19,4 +19,6 @@ wget https://raw.githubusercontent.com/yahyaerturan/scotchbox_scripts/master/v-a
 echo -e "Marking v-add-domain as executable.... OK! \n"
 chmod +x bin/v-add-domain
 
-echo -e "All Done! Simply type \"v-add-domain abc.dev\" to add new record to /etc/hosts"
+echo -e "All Done! Simply type followings to add new records your /etc/hosts:"
+echo -e "e.g. v-add-domain domain.ltd        =>  192.168.33.10 domain.ltd www.domain.ltd
+echo -e "e.g. v-add-domain domain.ltd YOURIP =>  YOURIP domain.ltd www.domain.ltd"
