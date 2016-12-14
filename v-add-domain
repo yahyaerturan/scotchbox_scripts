@@ -5,9 +5,17 @@
 # Go to home directory
 cd ~
 
-domain=$1;
-echo "192.168.33.10" $domain >> /etc/hosts;
-echo "192.168.33.10" www.$domain >> /etc/hosts;
+# Fetch paramaters
+domain=${1}
+fakeIP=${2}
+
+if [[ -z $fakeIP ]]; then
+    echo "192.168.33.10" $domain >> /etc/hosts;
+    echo "192.168.33.10" www.$domain >> /etc/hosts;
+else
+    echo "$fakeIP" $domain >> /etc/hosts;
+    echo "$fakeIP" www.$domain >> /etc/hosts;
+fi
 
 if grep -q "$domain" /etc/hosts; then
     echo "Your etc/hosts file now containes $domain:";
@@ -16,5 +24,5 @@ if grep -q "$domain" /etc/hosts; then
     echo "***";
     echo "$domain is added succesfully";
 else
-    echo "An error occured. $domain is NOT added your etc/hosts file";
+    echo "An error occured. Adding $domain to etc/hosts is failed!";
 fi
