@@ -16,7 +16,7 @@ fi
 echo -e "Downloading v-add-domain \n"
 wget https://raw.githubusercontent.com/yahyaerturan/scotchbox_scripts/master/v-add-domain --output-document=bin/v-add-domain
 
-echo "Set v-add-domain executable \n"
+echo -e "Set v-add-domain executable \n"
 chmod +x bin/v-add-domain
 
-echo -e "All Done! Simply type \"v-add-domain abc.dev\""
+echo -e "All Done! Simply type \"v-add-domain abc.dev\" to add new record to /etc/hosts"
