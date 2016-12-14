@@ -8,7 +8,7 @@ confPath="/etc/apache2/sites-available/$domain.conf"
 
 if [[ -z $folder ]]; then
     echo "You must specify a folder name under /home/vagrant/Code/"
-    echo "e.g. vayesEYS [to be resolved as /home/vagrant/Code/vayesEYS"
+    echo "e.g. vayesEYS [to be resolved as /home/vagrant/Code/vayesEYS]"
     exit
 else
     echo -e "Your Virtual Host is being created... \n"
