@@ -1,0 +1,27 @@
+#!/bin/bash
+
+(( EUID != 0 )) && exec sudo -- "$0" "$@"
+
+# Go to home directory and create bin if not exists
+cd ~
+mkdir -p bin;
+
+if grep -q "export PATH=\$PATH:\$HOME/bin" ~/.bashrc; then
+    echo -e "PATH to ~/bin detected. OK! \n";
+else
+    echo "export PATH=$PATH:$HOME/bin" >> .bashrc
+fi
+
+domain=$1;
+echo "192.168.33.10" $domain >> /etc/hosts;
+echo "192.168.33.10" www.$domain >> /etc/hosts;
+
+if grep -q "$domain" /etc/hosts; then
+    echo "Your etc/hosts file now containes $domain:";
+    echo "***";
+    cat /etc/hosts | grep "$domain";
+    echo "***";
+    echo "$domain is added succesfully";
+else
+    echo "An error occured. $domain is NOT added your etc/hosts file";
+fi
