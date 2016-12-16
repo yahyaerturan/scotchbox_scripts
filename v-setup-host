@@ -16,9 +16,17 @@ fi
 echo -e "Downloading v-add-domain \n"
 wget https://raw.githubusercontent.com/yahyaerturan/scotchbox_scripts/master/v-add-domain --output-document=bin/v-add-domain
 
+# Install and Setup v-remove-domain
+echo -e "Downloading v-remove-domain \n"
+wget https://raw.githubusercontent.com/yahyaerturan/scotchbox_scripts/master/v-remove-domain --output-document=bin/v-remove-domain
+
 echo -e "Marking v-add-domain as executable.... OK! \n"
 chmod +x bin/v-add-domain
 
-echo -e "All Done! Simply type followings to add new records your /etc/hosts:"
+echo -e "All Done!\n"
+echo -e "Simply type followings to add new records your /etc/hosts:"
 echo -e "e.g. v-add-domain domain.ltd        =>  192.168.33.10 domain.ltd www.domain.ltd"
-echo -e "e.g. v-add-domain domain.ltd YOURIP =>  YOURIP domain.ltd www.domain.ltd"
+echo -e "e.g. v-add-domain domain.ltd YOURIP =>  YOURIP domain.ltd www.domain.ltd\n"
+
+echo -e "Or remove a domain form your /etc/hosts:"
+echo -e "e.g. v-remove-domain domain.ltd"
