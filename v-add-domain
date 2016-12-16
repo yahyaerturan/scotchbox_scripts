@@ -3,9 +3,6 @@ echo -e "\n@author: Yahya ERTURAN <root@yahyaerturan.com> \n"
 
 (( EUID != 0 )) && exec sudo -- "$0" "$@"
 
-# Go to home directory
-cd ~
-
 # Fetch paramaters
 domain=${1}
 fakeIP=${2}
