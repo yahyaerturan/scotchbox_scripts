@@ -23,6 +23,9 @@ wget https://raw.githubusercontent.com/yahyaerturan/scotchbox_scripts/master/v-r
 echo -e "Marking v-add-domain as executable.... OK! \n"
 chmod +x bin/v-add-domain
 
+echo -e "Marking v-remove-domain as executable.... OK! \n"
+chmod +x bin/v-remove-domain
+
 echo -e "All Done!\n"
 echo -e "Simply type followings to add new records your /etc/hosts:"
 echo -e "e.g. v-add-domain domain.ltd        =>  192.168.33.10 domain.ltd www.domain.ltd"
