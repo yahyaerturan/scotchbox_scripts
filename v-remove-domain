@@ -1,0 +1,24 @@
+#!/bin/bash
+echo -e "\n@author: Yahya ERTURAN <root@yahyaerturan.com> \n"
+
+(( EUID != 0 )) && exec sudo -- "$0" "$@"
+
+# Fetch paramaters
+domain=${1}
+
+if [[ -z $domain ]]; then
+    echo -e "You must specify domain.ltd to removed!"
+    echo -e "e.g. v-remove-domain abc.com"
+else
+    echo "Attempting to remove $domain:"
+	sudo sed -i.bak "/$domain/d" /etc/hosts
+
+    if grep -q "$domain" /etc/hosts; then
+		echo "An error occured!	$domain is still on your etc/hosts!";,
+		echo "***";
+		cat /etc/hosts | grep "$domain";
+		echo "***";
+	else
+		echo "$domain is removed from your /etc/hosts succesfully!";
+	fi
+fi
