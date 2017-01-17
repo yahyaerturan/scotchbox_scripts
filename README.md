@@ -3,30 +3,38 @@ My Scripts to work with Vagrant Scotchbox 2.5
 
 There are some standard tasks which I have to do after a new Scotchbox. Changing Ondrej PPA Path, Upgrading MySQL, Installing PHPMyAdmin, tweak php.ini, etc. So I have written some codes to automate it.
 
+Scripts are assuming that you are on a Mac HOST machine.
+
+Minor changes are needed for Ubuntu HOST machines which are also documentated here.
+
 #### First just a little addition to Vagrantfile
-```bash
-config.vm.synced_folder "/home/yahya/Code", "/home/vagrant/Code", :mount_options => ["dmode=777", "fmode=666"]
+// For Mac
+config.vm.synced_folder "/Users/yahyaerturan/Code", "/home/vagrant/Code", :mount_options => ["dmode=777", "fmode=666"]
 ```
 
+```bash
+// For Ubuntu
+config.vm.synced_folder "/home/yahya/Code", "/home/vagrant/Code", :mount_options => ["dmode=777", "fmode=666"]
+
 ## Remimder
-All commands are designed to be run inside your home folder: `vagrant@scotchbox:~$ ` or `yahya@yahya-X550CC:~$ `
+All commands are designed to be run inside your home folder: `vagrant@scotchbox:~$ ` or `~$`
 
 ## Setting up the HOST Machine
 First we must some adjustments in our host machine.
 
 ### Download and Run v-setup-host
-
 ```bash
 wget https://raw.githubusercontent.com/yahyaerturan/scotchbox_scripts/master/v-setup-host --output-document=v-setup-host-machine-for-vagrant;chmod +x v-setup-host-machine-for-vagrant;./v-setup-host-machine-for-vagrant;rm v-setup-host-machine-for-vagrant
 ```
-It checks if you have a `~/bin` folder first. If not, creates one. Then it downloads `v-add-domain` to your `~/bin` directory and marks it as executable. Host Machine is ready :)
+
+It checks if you have a `~/Bin` folder first. If not, creates one. Then it downloads `v-add-domain` to your `~/Bin` directory and marks it as executable. Host Machine is ready :)
 
 ## Setup GUEST Machine
-
 ```bash
 wget https://raw.githubusercontent.com/yahyaerturan/scotchbox_scripts/master/v-setup-guest --output-document=v-setup-guest-machine-for-vagrant;chmod +x v-setup-guest-machine-for-vagrant;./v-setup-guest-machine-for-vagrant;rm v-setup-guest-machine-for-vagrant
 ```
-It checks if you have a `~/bin` folder first. If not, creates one. Then it downloads `v-add-host` to your `~/bin` directory and marks it as executable.
+
+It checks if you have a `~/Bin` folder for first. If not, creates one. Then it downloads `v-add-host` to your `~/Bin` directory and marks it as executable.
 
 Now you can create a new virtual host by:
 
@@ -34,7 +42,7 @@ Now you can create a new virtual host by:
 v-add-host vayes-eys.dev vayesEYS
 ```
 
-This commands automaticall sets `/home/vagrant/Code/vayesEYS/public`, which is a reflection of `/home/yahya/Code/vayesEYS/public` as DocumentRoot to your new Virtual Host: `vayes-eys.dev`
+This commands automaticall sets `/home/vagrant/Code/vayesEYS/public`, which is a reflection of `~/Code/vayesEYS/public` on your _HOST_ machine as the DocumentRoot to your new Virtual Host: `vayes-eys.dev`
 
 `vayesEYS` is the name of the folder under the `~/Code` folder on your HOST machine. It should have a `public` folder to serve.
 

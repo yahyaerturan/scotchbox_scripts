@@ -7,22 +7,22 @@ echo -e "\n@author: Yahya ERTURAN <root@yahyaerturan.com> \n"
 # Change directory to /home/{USER}
 cd ~
 
-echo -e "Attempting to create ~/bin directory... OK!"
-mkdir -p bin;
+echo -e "Attempting to create ~/Bin directory... OK!"
+mkdir -p Bin;
 
-if grep -q "export PATH=\$PATH:\$HOME/bin" ~/.bashrc; then
-    echo -e "PATH to ~/bin detected. OK! \n";
+if grep -q "export PATH=\$PATH:\$HOME/Bin" ~/.bashrc; then
+    echo -e "PATH to ~/Bin detected. OK! \n";
 else
-    echo "export PATH=$PATH:$HOME/bin" >> .bashrc
-    echo -e "Adding ~/bin as PATH to .bashrc... OK! \n"
+    echo "export PATH=$PATH:$HOME/Bin" >> .bashrc
+    echo -e "Adding ~/Bin as PATH to .bashrc... OK! \n"
 fi
 
 # Install and Setup v-add-host
 echo -e "Downloading v-add-host \n"
-wget https://raw.githubusercontent.com/yahyaerturan/scotchbox_scripts/master/v-add-host --output-document=bin/v-add-host
+wget https://raw.githubusercontent.com/yahyaerturan/scotchbox_scripts/master/v-add-host --output-document=Bin/v-add-host
 
 echo -e "Marking v-add-host as executable.... OK! \n"
-chmod +x bin/v-add-host
+chmod +x Bin/v-add-host
 
 # Replacing outdated PPA for Ondrej-PHP to updated Ondrej/PHP
 echo -e "\nAttempting to replace outdated PPA for Ondrej-PHP to updated Ondrej/PHP...\n"
@@ -60,5 +60,8 @@ sudo composer selfupdate
 echo -e "All Done! Simply type followings to add new virtual host on your guest machine:"
 echo -e "e.g. v-add-host domain.ltd FolderNameUnderYourHostMachineCodeFolder \n"
 
-echo -e "Remember to add following line Vagrantfile:"
+echo -e "If you are on Ubuntu Host Remember to add following line Vagrantfile :"
 echo -e "config.vm.synced_folder \"/home/yahya/Code\", \"/home/vagrant/Code\", :mount_options => [\"dmode=777\", \"fmode=666\"]"
+
+echo -e "If you are on Mac Host Remember to add following line Vagrantfile :"
+echo -e "config.vm.synced_folder \"/Users/yahyaerturan/Code\", \"/home/vagrant/Code\", :mount_options => [\"dmode=777\", \"fmode=666\"]"

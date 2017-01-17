@@ -2,29 +2,35 @@
 
 echo -e "\n@author: Yahya ERTURAN <root@yahyaerturan.com> \n"
 cd ~
-echo -e "Attempting to create ~/bin directory... OK!"
-mkdir -p bin;
+echo -e "Attempting to create ~/Bin directory... OK!"
+mkdir -p Bin;
 
-if grep -q "export PATH=\$PATH:\$HOME/bin" ~/.bashrc; then
-    echo -e "PATH to ~/bin detected. OK! \n";
+echo -e "Attempting to create ~/Code directory... OK!"
+mkdir -p Code;
+
+echo -e "Attempting to create ~/Code/logs directory... OK!"
+mkdir -p Code/logs;
+
+if grep -q "export PATH=\$PATH:\$HOME/Bin" ~/.bash_profile; then
+    echo -e "PATH to ~/Bin detected. OK! \n";
 else
-    echo "export PATH=$PATH:$HOME/bin" >> .bashrc
-    echo -e "Adding ~/bin as PATH to .bashrc... OK! \n"
+    echo "export PATH=$PATH:$HOME/Bin" >> .bash_profile
+    echo -e "Adding ~/Bin as PATH to .bash_profile... OK! \n"
 fi
 
 # Install and Setup v-add-domain
 echo -e "Downloading v-add-domain \n"
-wget https://raw.githubusercontent.com/yahyaerturan/scotchbox_scripts/master/v-add-domain --output-document=bin/v-add-domain
+wget https://raw.githubusercontent.com/yahyaerturan/scotchbox_scripts/master/v-add-domain --output-document=Bin/v-add-domain
 
 # Install and Setup v-remove-domain
 echo -e "Downloading v-remove-domain \n"
-wget https://raw.githubusercontent.com/yahyaerturan/scotchbox_scripts/master/v-remove-domain --output-document=bin/v-remove-domain
+wget https://raw.githubusercontent.com/yahyaerturan/scotchbox_scripts/master/v-remove-domain --output-document=Bin/v-remove-domain
 
 echo -e "Marking v-add-domain as executable.... OK! \n"
-chmod +x bin/v-add-domain
+chmod +x Bin/v-add-domain
 
 echo -e "Marking v-remove-domain as executable.... OK! \n"
-chmod +x bin/v-remove-domain
+chmod +x Bin/v-remove-domain
 
 echo -e "All Done!\n"
 echo -e "Simply type followings to add new records your /etc/hosts:"
