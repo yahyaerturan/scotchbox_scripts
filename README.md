@@ -8,6 +8,7 @@ Scripts are assuming that you are on a Mac HOST machine.
 Minor changes are needed for Ubuntu HOST machines which are also documentated here.
 
 #### First just a little addition to Vagrantfile
+```bash
 // For Mac
 config.vm.synced_folder "/Users/yahyaerturan/Code", "/home/vagrant/Code", :mount_options => ["dmode=777", "fmode=666"]
 ```
@@ -15,6 +16,7 @@ config.vm.synced_folder "/Users/yahyaerturan/Code", "/home/vagrant/Code", :mount
 ```bash
 // For Ubuntu
 config.vm.synced_folder "/home/yahya/Code", "/home/vagrant/Code", :mount_options => ["dmode=777", "fmode=666"]
+```
 
 ## Remimder
 All commands are designed to be run inside your home folder: `vagrant@scotchbox:~$ ` or `~$`
