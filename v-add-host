@@ -26,12 +26,12 @@ else
     sudo echo -e "            AllowOverride All" >> $confPath
     sudo echo -e "        Require all granted" >> $confPath
     sudo echo -e "    </Directory>" >> $confPath
-    sudo echo -e "    ErrorLog /home/vagrant/Code/logs/error.log" >> $confPath
-    sudo echo -e "    CustomLog /home/vagrant/Code/logs/access.log combined" >> $confPath
+    sudo echo -e "    ErrorLog ${APACHE_LOG_DIR}/error.log" >> $confPath
+    sudo echo -e "    CustomLog ${APACHE_LOG_DIR}/access.log combined" >> $confPath
     sudo echo -e "</VirtualHost>" >> $confPath
     echo -e "$confPath is created \n"
 
-    echo "Enabling $domain.."
+    echo "Enabling $domain ..."
     sudo a2ensite $domain
     echo "Restarting Apache2"
     sudo service apache2 restart

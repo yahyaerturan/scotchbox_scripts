@@ -8,9 +8,6 @@ mkdir -p Bin;
 echo -e "Attempting to create ~/Code directory... OK!"
 mkdir -p Code;
 
-echo -e "Attempting to create ~/Code/logs directory... OK!"
-mkdir -p Code/logs;
-
 if grep -q "export PATH=\$PATH:\$HOME/Bin" ~/.bash_profile; then
     echo -e "PATH to ~/Bin detected. OK! \n";
 else
