@@ -24,11 +24,6 @@ wget https://raw.githubusercontent.com/yahyaerturan/scotchbox_scripts/master/v-a
 echo -e "Marking v-add-host as executable.... OK! \n"
 chmod +x Bin/v-add-host
 
-# Set Locale for staying at the safe side
-echo "export LANGUAGE=en_US.UTF-8">>~/.bashrc
-echo "export LC_ALL=en_US.UTF-8 ">>~/.bashrc
-source .bashrc
-
 # Set Timezone of Machine
 sudo echo "Europe/Istanbul" > /etc/timezone;sudo dpkg-reconfigure -f noninteractive tzdata
 
