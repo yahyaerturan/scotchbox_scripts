@@ -24,6 +24,14 @@ wget https://raw.githubusercontent.com/yahyaerturan/scotchbox_scripts/master/v-a
 echo -e "Marking v-add-host as executable.... OK! \n"
 chmod +x Bin/v-add-host
 
+# Set Locale for staying at the safe side
+echo "export LANGUAGE=en_US.UTF-8">>~/.bashrc
+echo "export LC_ALL=en_US.UTF-8 ">>~/.bashrc
+source .bashrc
+
+# Set Timezone of Machine
+sudo echo "Europe/Istanbul" > /etc/timezone;sudo dpkg-reconfigure -f noninteractive tzdata
+
 # Replacing outdated PPA for Ondrej-PHP to updated Ondrej/PHP
 echo -e "\nAttempting to replace outdated PPA for Ondrej-PHP to updated Ondrej/PHP...\n"
 sudo rm /etc/apt/sources.list.d/ondrej-php*;sudo add-apt-repository ppa:ondrej/php;sudo apt-get update;
@@ -56,6 +64,11 @@ sudo sed -i s,"short_open_tag = Off","short_open_tag = On",g /etc/php5/apache2/p
 
 echo -e "\nAttempting to update Composer\n"
 sudo composer selfupdate
+
+echo -e "\nInstalling Symfony Installer\n"
+sudo mkdir -p /usr/local/bin
+sudo curl -LsS https://symfony.com/installer -o /usr/local/bin/symfony
+sudo chmod a+x /usr/local/bin/symfony
 
 echo -e "All Done! Simply type followings to add new virtual host on your guest machine:"
 echo -e "e.g. v-add-host domain.ltd FolderNameUnderYourHostMachineCodeFolder \n"
